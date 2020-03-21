@@ -40,7 +40,6 @@
             "rame",
             "strisce",
             "cocomeri",
-            "eremita",
             "turco",
             "caffè",
             "caselle",
@@ -819,7 +818,6 @@
             "spira",
             "lattea",
             "implica",
-            "meritano",
             "prudenza",
             "convinti",
             "influisca",
@@ -2197,9 +2195,7 @@
     {
         "name": "irene",
         "unique_words": [
-            "sporgersi",
             "ciglio",
-            "luci",
             "rosa",
             "abitato",
             "dirada",
@@ -2211,7 +2207,6 @@
             "calanchi",
             "transumano",
             "uccellatori",
-            "eremiti",
             "radicchi",
             "irene",
             "grancasse",
@@ -2226,16 +2221,13 @@
             "appiccati",
             "guerra",
             "civile",
-            "lassù",
             "congetture",
-            "accadendo",
             "intenzione",
             "valle",
             "cattive",
             "calamita",
             "marco",
-            "altronde",
-            "merita"
+            "altronde"
         ]
     }
 ]
