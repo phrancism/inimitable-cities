@@ -7,16 +7,23 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BB9370072427F97C004AC7F8 /* CitiesAllWords.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB9370062427F97C004AC7F8 /* CitiesAllWords.swift */; };
+		BB9370092427F9BC004AC7F8 /* cities_words.json in Resources */ = {isa = PBXBuildFile; fileRef = BB9370082427F9BC004AC7F8 /* cities_words.json */; };
+		BB93700B2428218F004AC7F8 /* ItalianAlphabetCounter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB93700A2428218F004AC7F8 /* ItalianAlphabetCounter.swift */; };
 		BBD0E84224271F5D00631BDB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD0E84124271F5D00631BDB /* AppDelegate.swift */; };
 		BBD0E84424271F5D00631BDB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD0E84324271F5D00631BDB /* SceneDelegate.swift */; };
 		BBD0E84624271F5D00631BDB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD0E84524271F5D00631BDB /* ViewController.swift */; };
 		BBD0E84924271F5D00631BDB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BBD0E84724271F5D00631BDB /* Main.storyboard */; };
 		BBD0E84B24271F6000631BDB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BBD0E84A24271F6000631BDB /* Assets.xcassets */; };
 		BBD0E84E24271F6000631BDB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BBD0E84C24271F6000631BDB /* LaunchScreen.storyboard */; };
-		BBD0E85724271FBE00631BDB /* UniqueWords.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD0E85624271FBE00631BDB /* UniqueWords.swift */; };
+		BBD0E85724271FBE00631BDB /* CitiesUniqueWords.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD0E85624271FBE00631BDB /* CitiesUniqueWords.swift */; };
+		BBD0E85A2427211E00631BDB /* cities_unique_words.json in Resources */ = {isa = PBXBuildFile; fileRef = BBD0E8592427211E00631BDB /* cities_unique_words.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		BB9370062427F97C004AC7F8 /* CitiesAllWords.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitiesAllWords.swift; sourceTree = "<group>"; };
+		BB9370082427F9BC004AC7F8 /* cities_words.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = cities_words.json; path = ../../../cities/json/cities_words.json; sourceTree = "<group>"; };
+		BB93700A2428218F004AC7F8 /* ItalianAlphabetCounter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItalianAlphabetCounter.swift; sourceTree = "<group>"; };
 		BBD0E83E24271F5D00631BDB /* inimitablecities.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = inimitablecities.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BBD0E84124271F5D00631BDB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BBD0E84324271F5D00631BDB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -25,7 +32,8 @@
 		BBD0E84A24271F6000631BDB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BBD0E84D24271F6000631BDB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BBD0E84F24271F6000631BDB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		BBD0E85624271FBE00631BDB /* UniqueWords.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniqueWords.swift; sourceTree = "<group>"; };
+		BBD0E85624271FBE00631BDB /* CitiesUniqueWords.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitiesUniqueWords.swift; sourceTree = "<group>"; };
+		BBD0E8592427211E00631BDB /* cities_unique_words.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = cities_unique_words.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -39,6 +47,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BB9370052427F3BC004AC7F8 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		BBD0E83524271F5D00631BDB = {
 			isa = PBXGroup;
 			children = (
@@ -59,9 +74,11 @@
 			isa = PBXGroup;
 			children = (
 				BBD0E85524271F8A00631BDB /* Models */,
+				BBD0E85B242721D400631BDB /* Controllers */,
+				BB9370052427F3BC004AC7F8 /* Views */,
+				BBD0E858242720DD00631BDB /* Resources */,
 				BBD0E84124271F5D00631BDB /* AppDelegate.swift */,
 				BBD0E84324271F5D00631BDB /* SceneDelegate.swift */,
-				BBD0E84524271F5D00631BDB /* ViewController.swift */,
 				BBD0E84724271F5D00631BDB /* Main.storyboard */,
 				BBD0E84A24271F6000631BDB /* Assets.xcassets */,
 				BBD0E84C24271F6000631BDB /* LaunchScreen.storyboard */,
@@ -73,9 +90,28 @@
 		BBD0E85524271F8A00631BDB /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				BBD0E85624271FBE00631BDB /* UniqueWords.swift */,
+				BBD0E85624271FBE00631BDB /* CitiesUniqueWords.swift */,
+				BB9370062427F97C004AC7F8 /* CitiesAllWords.swift */,
+				BB93700A2428218F004AC7F8 /* ItalianAlphabetCounter.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		BBD0E858242720DD00631BDB /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				BBD0E8592427211E00631BDB /* cities_unique_words.json */,
+				BB9370082427F9BC004AC7F8 /* cities_words.json */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		BBD0E85B242721D400631BDB /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				BBD0E84524271F5D00631BDB /* ViewController.swift */,
+			);
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -137,6 +173,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				BBD0E84E24271F6000631BDB /* LaunchScreen.storyboard in Resources */,
+				BBD0E85A2427211E00631BDB /* cities_unique_words.json in Resources */,
+				BB9370092427F9BC004AC7F8 /* cities_words.json in Resources */,
 				BBD0E84B24271F6000631BDB /* Assets.xcassets in Resources */,
 				BBD0E84924271F5D00631BDB /* Main.storyboard in Resources */,
 			);
@@ -150,8 +188,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				BBD0E84624271F5D00631BDB /* ViewController.swift in Sources */,
+				BB9370072427F97C004AC7F8 /* CitiesAllWords.swift in Sources */,
 				BBD0E84224271F5D00631BDB /* AppDelegate.swift in Sources */,
-				BBD0E85724271FBE00631BDB /* UniqueWords.swift in Sources */,
+				BBD0E85724271FBE00631BDB /* CitiesUniqueWords.swift in Sources */,
+				BB93700B2428218F004AC7F8 /* ItalianAlphabetCounter.swift in Sources */,
 				BBD0E84424271F5D00631BDB /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
