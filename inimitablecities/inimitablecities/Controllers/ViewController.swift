@@ -44,17 +44,17 @@ class ViewController: UIViewController {
         let highestFrequency = relativeFrequenciesSorted.max { $0.value < $1.value }!
 
         let skylineStartPoint = canvas.bounds.height * Constants.skylineStartPointRatio
-        let letterViewHeight = (canvas.bounds.height / Constants.italianAlphabetCount.cgFloat) * Constants.skylineHeightRatio
+        let buildingViewHeight = (canvas.bounds.height / Constants.italianAlphabetCount.cgFloat) * Constants.skylineHeightRatio
 
         relativeFrequenciesSorted.enumerated().forEach { i, frequency in
-            let letterViewWidth = canvasWidth * Constants.letterViewWidthRatio * (frequency.value / highestFrequency.value).cgFloat
-            let letterViewVerticalPosition = i.cgFloat * letterViewHeight + skylineStartPoint
-            let letterViewOrigin = CGPoint(x: CGFloat.zero, y: letterViewVerticalPosition)
-            let letterViewSize = CGSize(width: letterViewWidth, height: letterViewHeight)
-            let letterViewRect = CGRect(origin: letterViewOrigin, size: letterViewSize)
-            let letterView = UIView(frame: letterViewRect)
-            letterView.backgroundColor = Constants.letterViewBackgroundColor
-            canvas.addSubview(letterView)
+            let buildingViewWidth = canvasWidth * Constants.buildingViewWidthRatio * (frequency.value / highestFrequency.value).cgFloat
+            let buildingViewVerticalPosition = i.cgFloat * buildingViewHeight + skylineStartPoint
+            let buildingViewOrigin = CGPoint(x: CGFloat.zero, y: buildingViewVerticalPosition)
+            let buildingViewSize = CGSize(width: buildingViewWidth, height: buildingViewHeight)
+            let buildingViewRect = CGRect(origin: buildingViewOrigin, size: buildingViewSize)
+            let buildingView = UIView(frame: buildingViewRect)
+            buildingView.backgroundColor = Constants.buildingViewBackgroundColor
+            canvas.addSubview(buildingView)
         }
     }
 
@@ -109,8 +109,8 @@ private extension ViewController {
         static let letterPathBrightness: CGFloat = 0.75
         static let letterPathSaturation: CGFloat = 0.8
         static let letterPathWidth: CGFloat = 2.0
-        static let letterViewBackgroundColor: UIColor = .black
-        static let letterViewWidthRatio: CGFloat = 0.75
+        static let buildingViewBackgroundColor: UIColor = .black
+        static let buildingViewWidthRatio: CGFloat = 0.75
         static let skylineHeightRatio: CGFloat = 0.9
         static var skylineStartPointRatio: CGFloat { (1 - skylineHeightRatio) / 2}
     }
