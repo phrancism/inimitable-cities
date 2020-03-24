@@ -4,7 +4,9 @@ class ViewController: UIViewController {
     @IBOutlet weak var canvas: UIView!
     private var canvasHeight: CGFloat { canvas.bounds.height }
     private var canvasWidth: CGFloat { canvas.bounds.width }
+    private var canvasMinX: CGFloat { canvas.bounds.minX }
     private var canvasMinY: CGFloat { canvas.bounds.minY }
+    private var canvasMidX: CGFloat { canvas.bounds.midX }
     private var canvasMidY: CGFloat { canvas.bounds.midY }
     
 
@@ -18,9 +20,10 @@ class ViewController: UIViewController {
         let offsetWordsCount = cityUniqueWords.uniqueWords.count + 1
         for (i, word) in cityUniqueWords.uniqueWords.enumerated() {
             let offsetIndex = i + 1
-            let ratio: CGFloat = 1 - (offsetIndex.cgFloat / offsetWordsCount.cgFloat)
+            let ratio: CGFloat = (offsetIndex.cgFloat / offsetWordsCount.cgFloat)
             let startPointX: CGFloat = ratio * canvasWidth
-            let startPoint = CGPoint(x: startPointX, y: canvasMinY)
+            let startPointY: CGFloat = ratio * canvasHeight
+            let startPoint = CGPoint(x: canvasMinX, y: startPointY)
 
             for letter in Array(word).map(String.init) {
                 drawPathFor(letter.normalized, startingAt: startPoint)
@@ -47,13 +50,13 @@ class ViewController: UIViewController {
         let buildingViewHeight = (canvas.bounds.height / Constants.italianAlphabetCount.cgFloat) * Constants.skylineHeightRatio
 
         relativeFrequenciesSorted.enumerated().forEach { i, frequency in
-            let buildingViewWidth = canvasWidth * Constants.buildingViewWidthRatio * (frequency.value / highestFrequency.value).cgFloat
+            let buildingViewWidth = canvasWidth * Constants.buildingViewWidthRatio * (frequency.value / 0.25).cgFloat
             let buildingViewVerticalPosition = i.cgFloat * buildingViewHeight + skylineStartPoint
             let buildingViewOrigin = CGPoint(x: CGFloat.zero, y: buildingViewVerticalPosition)
             let buildingViewSize = CGSize(width: buildingViewWidth, height: buildingViewHeight)
             let buildingViewRect = CGRect(origin: buildingViewOrigin, size: buildingViewSize)
             let buildingView = UIView(frame: buildingViewRect)
-            buildingView.backgroundColor = Constants.buildingViewBackgroundColor
+            buildingView.backgroundColor = canvas.backgroundColor ?? .black
             canvas.addSubview(buildingView)
         }
     }
@@ -61,8 +64,8 @@ class ViewController: UIViewController {
     private func drawPathFor(_ letter: String, startingAt startPoint: CGPoint) {
         let path = UIBezierPath()
         let endPoint = letterPathEndPointFor(letter)
-        let leftControlPoint = CGPoint(x: endPoint.x, y: canvasMidY)
-        let rightControlPoint = CGPoint(x: startPoint.x, y: canvasMidY)
+        let leftControlPoint = CGPoint(x: canvasMidX, y: endPoint.y)
+        let rightControlPoint = CGPoint(x: canvasMidX, y: startPoint.y)
 
         path.move(to: startPoint)
         path.addCurve(to: endPoint, controlPoint1: rightControlPoint, controlPoint2: leftControlPoint)
@@ -76,7 +79,7 @@ class ViewController: UIViewController {
             brightness: Constants.letterPathBrightness,
             alpha: Constants.letterPathAlpha
         ).cgColor
-        shapeLayer.lineWidth = 2
+        shapeLayer.lineWidth = Constants.letterPathWidth
         shapeLayer.fillColor = UIColor(white: 0, alpha: 0).cgColor
         canvas.layer.addSublayer(shapeLayer)
     }
@@ -88,10 +91,11 @@ class ViewController: UIViewController {
         let offsetIndex = index + 1
         let offsetItalianAlphabetCount = Constants.italianAlphabetCount + 1
 
-        let ratio: CGFloat = 1 - (offsetIndex.cgFloat / offsetItalianAlphabetCount.cgFloat)
+        let ratio: CGFloat = (offsetIndex.cgFloat / offsetItalianAlphabetCount.cgFloat)
         let xValue: CGFloat = ratio * canvasWidth
+        let yValue: CGFloat = ratio * canvasHeight
 
-        return CGPoint(x: xValue, y: canvasHeight)
+        return CGPoint(x: canvasWidth, y: yValue)
     }
 
     private func hueFor(_ letter: String) -> CGFloat {
@@ -108,10 +112,9 @@ private extension ViewController {
         static let letterPathAlpha: CGFloat = 0.25
         static let letterPathBrightness: CGFloat = 0.75
         static let letterPathSaturation: CGFloat = 0.8
-        static let letterPathWidth: CGFloat = 2.0
-        static let buildingViewBackgroundColor: UIColor = .black
+        static let letterPathWidth: CGFloat = 3.0
         static let buildingViewWidthRatio: CGFloat = 0.75
-        static let skylineHeightRatio: CGFloat = 0.9
+        static let skylineHeightRatio: CGFloat = 0.95
         static var skylineStartPointRatio: CGFloat { (1 - skylineHeightRatio) / 2}
     }
 }
