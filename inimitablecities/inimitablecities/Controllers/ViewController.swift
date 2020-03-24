@@ -109,7 +109,7 @@ private extension ViewController {
         static let letterPathBrightness: CGFloat = 0.75
         static let letterPathSaturation: CGFloat = 0.8
         static let letterPathWidth: CGFloat = 2.0
-        static let letterViewBackgroundColor: UIColor = UIColor(white: 1.0, alpha: 0.3)
+        static let letterViewBackgroundColor: UIColor = .black
         static let letterViewWidthRatio: CGFloat = 0.75
         static let skylineHeightRatio: CGFloat = 0.9
         static var skylineStartPointRatio: CGFloat { (1 - skylineHeightRatio) / 2}
