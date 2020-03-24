@@ -23,7 +23,7 @@ class ViewController: UIViewController {
             let ratio: CGFloat = (offsetIndex.cgFloat / offsetWordsCount.cgFloat)
             let startPointX: CGFloat = ratio * canvasWidth
             let startPointY: CGFloat = ratio * canvasHeight
-            let startPoint = CGPoint(x: canvasMinX, y: startPointY)
+            let startPoint = CGPoint(x: canvasWidth, y: startPointY)
 
             for letter in Array(word).map(String.init) {
                 drawPathFor(letter.normalized, startingAt: startPoint)
@@ -95,7 +95,7 @@ class ViewController: UIViewController {
         let xValue: CGFloat = ratio * canvasWidth
         let yValue: CGFloat = ratio * canvasHeight
 
-        return CGPoint(x: canvasWidth, y: yValue)
+        return CGPoint(x: canvasMinX, y: yValue)
     }
 
     private func hueFor(_ letter: String) -> CGFloat {
