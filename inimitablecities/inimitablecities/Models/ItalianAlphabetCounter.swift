@@ -1,6 +1,11 @@
 import Foundation
 
 struct ItalianAlphabetCounter {
+    static let letters = [
+        "a", "b", "c", "d", "e", "f", "g",
+        "h", "i", "l", "m", "n", "o", "p",
+        "q", "r", "s", "t", "u", "v", "z",
+    ]
 
     var counter: [String: Int] = [
         "a": 0, "b": 0, "c": 0, "d": 0, "e": 0, "f": 0, "g": 0,
