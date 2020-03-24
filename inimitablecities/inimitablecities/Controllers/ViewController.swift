@@ -8,14 +8,12 @@ class ViewController: UIViewController {
     private var canvasMidY: CGFloat { canvas.bounds.midY }
     
 
-    private let cityName = "clarice"
+    private let cityName = "olivia"
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         let cityUniqueWords = CitiesUniqueWords.default.data.first { $0.name == cityName }!
-
-        print(cityUniqueWords.uniqueWords)
 
         let offsetWordsCount = cityUniqueWords.uniqueWords.count + 1
         for (i, word) in cityUniqueWords.uniqueWords.enumerated() {
@@ -55,9 +53,7 @@ class ViewController: UIViewController {
             let letterViewSize = CGSize(width: letterViewWidth, height: letterViewHeight)
             let letterViewRect = CGRect(origin: letterViewOrigin, size: letterViewSize)
             let letterView = UIView(frame: letterViewRect)
-            letterView.backgroundColor = UIColor(white: 1.0, alpha: 0.3)
-//            letterView.layer.borderColor = UIColor.black.cgColor
-//            letterView.layer.borderWidth = 2
+            letterView.backgroundColor = Constants.letterViewBackgroundColor
             canvas.addSubview(letterView)
         }
     }
@@ -113,6 +109,7 @@ private extension ViewController {
         static let letterPathBrightness: CGFloat = 0.75
         static let letterPathSaturation: CGFloat = 0.8
         static let letterPathWidth: CGFloat = 2.0
+        static let letterViewBackgroundColor: UIColor = UIColor(white: 1.0, alpha: 0.3)
         static let letterViewWidthRatio: CGFloat = 0.75
         static let skylineHeightRatio: CGFloat = 0.9
         static var skylineStartPointRatio: CGFloat { (1 - skylineHeightRatio) / 2}
@@ -135,7 +132,7 @@ private extension String {
             case "é", "è": return "e"
             case "ì": return "i"
             case "ò": return "o"
-            case "ù": return "ù"
+            case "ù": return "u"
             default: return self
         }
     }
