@@ -10,12 +10,13 @@ class ViewController: UIViewController {
     private var canvasMidY: CGFloat { canvas.bounds.midY }
     
 
-    private let cityName = "clarice"
+    private let cityName = "armilla"
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+
         let cityUniqueWords = CitiesUniqueWords.default.data.first { $0.name == cityName }!
+        let cityAllWords = CitiesAllWords.default.data.first { $0.name == cityName}!
 
         let letterPathStartOffset = canvasHeight * Constants.letterPathOffsetRatio
         let offsetWordsCount = cityUniqueWords.uniqueWords.count + 1
@@ -30,27 +31,37 @@ class ViewController: UIViewController {
             }
         }
 
-        drawSkylineFor(cityUniqueWords)
+        drawSkyline(withUniqueWords: cityUniqueWords, fullText: cityAllWords)
     }
 
-    private func drawSkylineFor(_ cityUniqueWords: CityUniqueWords) {
+    private func drawSkyline(withUniqueWords cityUniqueWords: CityUniqueWords, fullText cityAllWords: CityAllWords) {
         let lettersOfUniqueWords = cityUniqueWords.uniqueWords.flatMap { $0.map(String.init) }
+        let lettersOfAllWords = cityAllWords.words.flatMap { $0.map(String.init) }
 
         var counterLettersOfUniqueWords = ItalianAlphabetCounter()
+        var counterLettersOfAllWords = ItalianAlphabetCounter()
 
         for letter in lettersOfUniqueWords {
-            guard counterLettersOfUniqueWords.counter.keys.contains(letter) else { continue }
+            guard ItalianAlphabetCounter.letters.contains(letter) else { continue }
             counterLettersOfUniqueWords.counter[letter.normalized]! += 1
         }
 
-        let relativeFrequenciesSorted = counterLettersOfUniqueWords.relativeFrequencies.sorted { $0.key < $1.key }
+        for letter in lettersOfAllWords {
+            guard ItalianAlphabetCounter.letters.contains(letter) else { continue }
+            counterLettersOfAllWords.counter[letter.normalized]! += 1
+        }
+
+        let counterLettersOfUniqueWordsSorted = counterLettersOfUniqueWords.counter.sorted { $0.key < $1.key }
+        let counterLettersOfAllWordsSorted = counterLettersOfAllWords.counter.sorted { $0.key < $1.key }
+        let counterLettersZipped = zip(counterLettersOfUniqueWordsSorted, counterLettersOfAllWordsSorted)
 
         let skylineStartPoint = canvas.bounds.height * Constants.skylineStartPointRatio
         let buildingViewHeight = (canvas.bounds.height / Constants.italianAlphabetCount.cgFloat) * Constants.skylineHeightRatio
 
-        relativeFrequenciesSorted.enumerated().forEach { i, frequency in
-            let buildinViewBaseHeight = canvasWidth * Constants.buildingViewBaseHeightRatio
-            let buildingViewWidth = buildinViewBaseHeight + canvasWidth * Constants.buildingViewWidthRatio * (frequency.value / 0.25).cgFloat
+        counterLettersZipped.enumerated().forEach { i, letterCountTuple in
+            let frequency = letterCountTuple.0.value.double / letterCountTuple.1.value.double
+            let buildingViewBaseHeight = canvasWidth * Constants.buildingViewBaseHeightRatio
+            let buildingViewWidth = buildingViewBaseHeight + canvasWidth * Constants.buildingViewWidthRatio * (frequency).cgFloat
             let buildingViewVerticalPosition = i.cgFloat * buildingViewHeight + skylineStartPoint
             let buildingViewOrigin = CGPoint(x: CGFloat.zero, y: buildingViewVerticalPosition)
             let buildingViewSize = CGSize(width: buildingViewWidth, height: buildingViewHeight)
@@ -126,8 +137,8 @@ private extension Double {
 }
 
 private extension Int {
+    var double: Double { Double(self) }
     var cgFloat: CGFloat { CGFloat(self) }
-    var isEven: Bool { return (self % 2) == 0  }
 }
 
 private extension String {
