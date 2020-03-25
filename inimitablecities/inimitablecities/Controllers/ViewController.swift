@@ -10,20 +10,20 @@ class ViewController: UIViewController {
     private var canvasMidY: CGFloat { canvas.bounds.midY }
     
 
-    private let cityName = "olivia"
+    private let cityName = "clarice"
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         let cityUniqueWords = CitiesUniqueWords.default.data.first { $0.name == cityName }!
 
+        let letterPathStartOffset = canvasHeight * Constants.letterPathOffsetRatio
         let offsetWordsCount = cityUniqueWords.uniqueWords.count + 1
         for (i, word) in cityUniqueWords.uniqueWords.enumerated() {
             let offsetIndex = i + 1
             let ratio: CGFloat = (offsetIndex.cgFloat / offsetWordsCount.cgFloat)
-            let startPointX: CGFloat = ratio * canvasWidth
-            let startPointY: CGFloat = ratio * canvasHeight
-            let startPoint = CGPoint(x: canvasWidth, y: startPointY)
+            let startPointY: CGFloat = letterPathStartOffset + ratio * (canvasHeight - letterPathStartOffset * 2)
+            let startPoint = CGPoint(x: canvasMinX, y: startPointY)
 
             for letter in Array(word).map(String.init) {
                 drawPathFor(letter.normalized, startingAt: startPoint)
@@ -44,7 +44,6 @@ class ViewController: UIViewController {
         }
 
         let relativeFrequenciesSorted = counterLettersOfUniqueWords.relativeFrequencies.sorted { $0.key < $1.key }
-        let highestFrequency = relativeFrequenciesSorted.max { $0.value < $1.value }!
 
         let skylineStartPoint = canvas.bounds.height * Constants.skylineStartPointRatio
         let buildingViewHeight = (canvas.bounds.height / Constants.italianAlphabetCount.cgFloat) * Constants.skylineHeightRatio
@@ -57,7 +56,7 @@ class ViewController: UIViewController {
             let buildingViewSize = CGSize(width: buildingViewWidth, height: buildingViewHeight)
             let buildingViewRect = CGRect(origin: buildingViewOrigin, size: buildingViewSize)
             let buildingView = UIView(frame: buildingViewRect)
-            buildingView.backgroundColor = canvas.backgroundColor ?? .black
+            buildingView.backgroundColor = Constants.buildingViewBackgroundColor
             canvas.addSubview(buildingView)
         }
     }
@@ -65,8 +64,8 @@ class ViewController: UIViewController {
     private func drawPathFor(_ letter: String, startingAt startPoint: CGPoint) {
         let path = UIBezierPath()
         let endPoint = letterPathEndPointFor(letter)
-        let leftControlPoint = CGPoint(x: canvasMidX, y: endPoint.y)
-        let rightControlPoint = CGPoint(x: canvasMidX, y: startPoint.y)
+        let leftControlPoint = CGPoint(x: canvasWidth * 0.6, y: endPoint.y)
+        let rightControlPoint = CGPoint(x: canvasWidth * 0.4, y: startPoint.y)
 
         path.move(to: startPoint)
         path.addCurve(to: endPoint, controlPoint1: rightControlPoint, controlPoint2: leftControlPoint)
@@ -93,10 +92,9 @@ class ViewController: UIViewController {
         let offsetItalianAlphabetCount = Constants.italianAlphabetCount + 1
 
         let ratio: CGFloat = (offsetIndex.cgFloat / offsetItalianAlphabetCount.cgFloat)
-        let xValue: CGFloat = ratio * canvasWidth
         let yValue: CGFloat = ratio * canvasHeight
 
-        return CGPoint(x: canvasMinX, y: yValue)
+        return CGPoint(x: canvasWidth, y: yValue)
     }
 
     private func hueFor(_ letter: String) -> CGFloat {
@@ -114,9 +112,11 @@ private extension ViewController {
         static let letterPathBrightness: CGFloat = 0.75
         static let letterPathSaturation: CGFloat = 0.8
         static let letterPathWidth: CGFloat = 3.0
+        static let letterPathOffsetRatio: CGFloat = 0.02
+        static let buildingViewBackgroundColor: UIColor = .init(white: 0.1, alpha: 0.8)
         static let buildingViewBaseHeightRatio: CGFloat = 0.125
         static let buildingViewWidthRatio: CGFloat = 0.75
-        static let skylineHeightRatio: CGFloat = 0.95
+        static let skylineHeightRatio: CGFloat = 1.0 - (1 / ItalianAlphabetCounter.letters.count.cgFloat)
         static var skylineStartPointRatio: CGFloat { (1 - skylineHeightRatio) / 2}
     }
 }
