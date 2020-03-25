@@ -50,7 +50,8 @@ class ViewController: UIViewController {
         let buildingViewHeight = (canvas.bounds.height / Constants.italianAlphabetCount.cgFloat) * Constants.skylineHeightRatio
 
         relativeFrequenciesSorted.enumerated().forEach { i, frequency in
-            let buildingViewWidth = canvasWidth * Constants.buildingViewWidthRatio * (frequency.value / 0.25).cgFloat
+            let buildinViewBaseHeight = canvasWidth * Constants.buildingViewBaseHeightRatio
+            let buildingViewWidth = buildinViewBaseHeight + canvasWidth * Constants.buildingViewWidthRatio * (frequency.value / 0.25).cgFloat
             let buildingViewVerticalPosition = i.cgFloat * buildingViewHeight + skylineStartPoint
             let buildingViewOrigin = CGPoint(x: CGFloat.zero, y: buildingViewVerticalPosition)
             let buildingViewSize = CGSize(width: buildingViewWidth, height: buildingViewHeight)
@@ -113,6 +114,7 @@ private extension ViewController {
         static let letterPathBrightness: CGFloat = 0.75
         static let letterPathSaturation: CGFloat = 0.8
         static let letterPathWidth: CGFloat = 3.0
+        static let buildingViewBaseHeightRatio: CGFloat = 0.125
         static let buildingViewWidthRatio: CGFloat = 0.75
         static let skylineHeightRatio: CGFloat = 0.95
         static var skylineStartPointRatio: CGFloat { (1 - skylineHeightRatio) / 2}
