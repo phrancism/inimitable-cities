@@ -10,7 +10,7 @@ class ViewController: UIViewController {
     private var canvasMidY: CGFloat { canvas.bounds.midY }
     
 
-    private let cityName = "armilla"
+    private let cityName = "cloe"
 
     override func viewDidLoad() {
         super.viewDidLoad()
