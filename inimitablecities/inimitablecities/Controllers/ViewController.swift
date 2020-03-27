@@ -10,7 +10,7 @@ class ViewController: UIViewController {
     private var canvasMidY: CGFloat { canvas.bounds.midY }
     
 
-    private let cityName = "cloe"
+    private let cityName = "teodora"
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -124,7 +124,7 @@ private extension ViewController {
         static let letterPathSaturation: CGFloat = 0.8
         static let letterPathWidth: CGFloat = 3.0
         static let letterPathOffsetRatio: CGFloat = 0.02
-        static let buildingViewBackgroundColor: UIColor = .init(white: 0.1, alpha: 0.8)
+        static let buildingViewBackgroundColor: UIColor = .init(white: 0.20, alpha: 0.8)
         static let buildingViewBaseHeightRatio: CGFloat = 0.125
         static let buildingViewWidthRatio: CGFloat = 0.75
         static let skylineHeightRatio: CGFloat = 1.0 - (1 / ItalianAlphabetCounter.letters.count.cgFloat)
